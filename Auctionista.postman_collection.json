@@ -96,9 +96,16 @@
 					}
 				}
 			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:3000/data/3_ongoing_auctions",
 					"protocol": "http",
@@ -260,14 +267,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:3000/data/6_latest_bid",
+					"raw": "localhost:3000/data/6_latest_bid/3",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
 						"data",
-						"6_latest_bid"
+						"6_latest_bid",
+						"3"
 					]
 				},
 				"description": "6"

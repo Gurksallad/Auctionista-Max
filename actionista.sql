@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Värd: 127.0.0.1
--- Tid vid skapande: 20 mars 2020 kl 13:43
+-- Tid vid skapande: 20 mars 2020 kl 16:24
 -- Serverversion: 10.4.10-MariaDB
 -- PHP-version: 7.3.12
 
@@ -408,7 +408,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_email`) VALUES
 --
 DROP TABLE IF EXISTS `3_ongoing_auctions`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `3_ongoing_auctions`  AS  select `items`.`item_id` AS `item_id`,`items`.`item_name` AS `item_name`,`items`.`seller_id` AS `seller_id`,`items`.`item_desc` AS `item_desc`,`items`.`item_img` AS `item_img`,`items`.`reserved_price` AS `reserved_price`,`items`.`auction_start` AS `auction_start`,`items`.`auction_end` AS `auction_end` from `items` where `items`.`auction_end` >= '2020-03-20 14:00' ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `3_ongoing_auctions`  AS  select `items`.`item_id` AS `item_id`,`items`.`item_name` AS `item_name`,`items`.`seller_id` AS `seller_id`,`items`.`item_desc` AS `item_desc`,`items`.`item_img` AS `item_img`,`items`.`reserved_price` AS `reserved_price`,`items`.`auction_start` AS `auction_start`,`items`.`auction_end` AS `auction_end` from `items` where `items`.`auction_end` >= current_timestamp() and `items`.`auction_start` <= current_timestamp() ;
 
 -- --------------------------------------------------------
 
@@ -426,7 +426,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `6_latest_bid`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `6_latest_bid`  AS  select `bids`.`bid_id` AS `bid_id`,`bids`.`bid_item` AS `bid_item`,`bids`.`bid_user` AS `bid_user`,`bids`.`bid_price` AS `bid_price`,`bids`.`bid_time` AS `bid_time` from `bids` where `bids`.`bid_item` = 3 order by `bids`.`bid_time` desc ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `6_latest_bid`  AS  select `bids`.`bid_id` AS `bid_id`,`bids`.`bid_item` AS `bid_item`,`bids`.`bid_user` AS `bid_user`,`bids`.`bid_price` AS `bid_price`,`bids`.`bid_time` AS `bid_time` from `bids` order by `bids`.`bid_time` desc ;
 
 -- --------------------------------------------------------
 
